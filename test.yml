@@ -1,0 +1,15 @@
+name: Label issues
+
+on:
+  issues:
+    types: [opened, reopened]
+  workflow_dispatch:
+
+jobs:
+  get-and-save-issue-body:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get issue body
+        run: | 
+          echo "ISSUE_BODY=${{ github.event.issue.body }} >> $GITHUB_ENV
+          echo "${{ env.ISSUE_BODY }}"
