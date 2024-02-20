@@ -16,7 +16,7 @@ body:
     label: "Which api environments do you want to create a key for?\U0001F310"
     description: You may select more than one.
     options:
-    - lable: "external"
+    - label: "external"
     - label: "internal"
   validations:
     required: true
