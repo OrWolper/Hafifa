@@ -17,6 +17,15 @@ jobs:
           PROJECT_NAME=$(echo "${{ github.event.issue.body }}" | awk 'NR == 2')
           EXTERNAL=$(echo "${{ github.event.issue.body }}" | awk 'NR == 4')
           INTERNAL=$(echo "${{ github.event.issue.body }}" | awk 'NR == 5')
+      
+      -name: Print project
+       run: |
           echo "$PROJECT_NAME"
+      
+      -name: Print external
+       run: |
           echo "$EXTERNAL"
+      
+      -name: Print internal
+       run: |
           echo "$INTERNAL"
