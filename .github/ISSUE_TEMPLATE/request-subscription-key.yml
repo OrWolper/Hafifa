@@ -1,0 +1,22 @@
+name: "Request a subscription key\U0001F511"
+description: Request a subscription key for the Tzohar Digitali API Management
+title: '[Request a subscription key]: '
+labels:
+- "Subscription Key Request\U0001F511"
+body:
+- type: input
+  id: project-name
+  attributes:
+    label: "Enter project name\U0001F4DD"
+  validations:
+    required: true
+- type: checkboxes
+  id: api-environment
+  attributes:
+    label: "Which api environments do you want to create a key for?\U0001F310"
+    description: You may select more than one.
+    options:
+    - lable: "external"
+    - label: "internal"
+  validations:
+    required: true
