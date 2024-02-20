@@ -9,10 +9,14 @@ jobs:
   get-and-save-issue-body:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-      - name: Create key name env variable
-        run: echo "KEY=or-${{ github.event.issue.body }}-external" >> ${GITHUB_ENV}
-
-      - name: G
-        run: echo "${{ env.ISSUE_BODY }}"
+      - name: Validate issue body
+        run: |
+          PROJECT_NAME=$(echo "${{ github.event.issue.body }}" | awk 'NR == 2')
+          EXTERNAL=$(echo "${{ github.event.issue.body }}" | awk 'NR == 4')
+          INTERNAL=$(echo "${{ github.event.issue.body }}" | awk 'NR == 5')
+          echo "$PROJECT_NAME"
+          echo "$EXTERNAL"
+          echo "$INTERNAL"
