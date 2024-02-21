@@ -15,8 +15,10 @@ jobs:
       - name: Get subscription info
         run: |
           PROJECT_NAME=$(echo "${{ github.event.issue.body }}" | awk 'NR == 3')
-          EXTERNAL=$(echo "${{ github.event.issue.body }}" | awk 'NR == 7 {print substr($0, 3, 3)}')
-          INTERNAL=$(echo "${{ github.event.issue.body }}" | awk 'NR == 8 {print substr($0, 3, 3)}')
+          EXTERNAL_CHECKBOX=$(echo "${{ github.event.issue.body }}" | awk 'NR == 7 {print substr($0, 3, 3)}')
+          EXTERNAL=$(echo "${{ github.event.issue.body }}" | awk 'NR == 7 {if ($2 == "[x]") print $3}')
+          INTERNAL_CHECKBOX=$(echo "${{ github.event.issue.body }}" | awk 'NR == 8 {print substr($0, 3, 3)}')
           echo "$PROJECT_NAME"
           echo "$EXTERNAL"
-          echo "$INTERNAL"
+          echo "$EXTERNAL_CHECKBOX"
+          echo "$INTERNAL_CHECKBOX"
