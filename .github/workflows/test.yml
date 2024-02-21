@@ -25,5 +25,6 @@ jobs:
           echo "$PROJECT_NAME"
           echo "$EXTERNAL_KEY"
           echo "$INTERNAL_KEY"
-          if [ "${EXTERNAL_CHECKBOX}" == "[X]" ]; then
+          if [[ "${EXTERNAL_CHECKBOX}" == "[X]" ]]; then
             echo "external"
+          fi
