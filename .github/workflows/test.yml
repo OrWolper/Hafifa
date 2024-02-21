@@ -21,5 +21,6 @@ jobs:
           INTERNAL_CHECKBOX=$(echo "${{ github.event.issue.body }}" | awk 'NR == 8 {print substr($0, 3, 3)}')
           echo "$PROJECT_NAME"
           echo "$EXTERNAL"
+          echo "$INTERNAL"
           echo "$EXTERNAL_CHECKBOX"
           echo "$INTERNAL_CHECKBOX"
