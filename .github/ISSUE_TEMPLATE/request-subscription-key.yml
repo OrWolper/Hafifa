@@ -4,9 +4,31 @@ title: '[Request a subscription key]: '
 labels:
 - "Subscription Key Request\U0001F511"
 body:
-- type: input
+- type: dropdown
   id: project-name
   attributes:
-    label: "Enter project name\U0001F4DD"
+    label: "Select project name\U0001F4DD"
+    options:
+    - prat-preprod
+    - prat-prod
+    - miluim-prod
+    - medicine-preprod
+    - idan-lazar-neww2
+    - idan-neww7
+    - pratt-preprod
+    - medicine-prod
+    - digitalfiles-prod
+    - logmar-prod
+    - miluim-preprod
+  validations:
+    required: true
+- type: checkboxes
+  id: api-environment
+  attributes:
+    label: "Which api environments do you want to create a key for?\U0001F310"
+    description: You may select more than one.
+    options:
+    - label: external
+    - label: internal
   validations:
     required: true

@@ -1,4 +1,4 @@
-name: Label issues
+name: Issue created
 
 on:
   issues:
@@ -6,15 +6,17 @@ on:
   workflow_dispatch:
 
 jobs:
-  get-and-save-issue-body:
+  create-subscription-key:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Validate issue body
+      - name: Get subscription info
         run: |
           PROJECT_NAME=$(echo "${{ github.event.issue.body }}" | awk 'NR == 3')
+          EXTERNAL=$(echo "${{ github.event.issue.body }}" | awk 'NR == 7')
+          INTERNAL=$(echo "${{ github.event.issue.body }}" | awk 'NR == 8')
           echo "$PROJECT_NAME"
       
       - name: Print project

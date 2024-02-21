@@ -1,0 +1,39 @@
+# name: Update project list every one hour.
+
+# on:
+#   workflow_dispatch:
+  
+#   schedule:
+#     - cron: '0 * * * *'
+
+
+
+# jobs:
+#   build:
+#     runs-on: ubuntu-latest
+#     environment: # TODO create environment
+    
+#     steps:
+#       - name: Checkout repository
+#         uses: actions/checkout@v2
+
+#       - name: Set up Python
+#         uses: actions/setup-python@v2
+#         with:
+#           python-version: 3.x
+
+#       - name: Install dependencies
+#         run: pip install -r requirements.txt
+
+#       - name: Update issue template
+#         run: python update-subscriptions-list.py
+
+#       - name: Commit changes
+#         run: |
+#           set +e
+#           git config user.email "digitalidf-automation@idf.il"
+#           git config user.name "digitalidf-automation"
+#           git add ./.github/ISSUE_TEMPLATE/request-subscription-key.yaml
+#           git commit -m "Updating issue projects list "
+#           git push --force origin main
+          
