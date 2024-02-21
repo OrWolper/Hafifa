@@ -18,9 +18,5 @@ jobs:
           EXTERNAL=$(echo "${{ github.event.issue.body }}" | awk 'NR == 7')
           INTERNAL=$(echo "${{ github.event.issue.body }}" | awk 'NR == 8')
           echo "$PROJECT_NAME"
-      
-      - name: Print project
-        run: echo "$PROJECT_NAME"
-      
-      - name: Print projec
-        run: echo "or-fsfs"
+          echo "$EXTERNAL"
+          echo "$INTERNAL"
