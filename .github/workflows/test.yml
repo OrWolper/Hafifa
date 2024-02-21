@@ -20,11 +20,17 @@ jobs:
           PROJECT_NAME=$(echo "${{ github.event.issue.body }}" | awk 'NR == 3')
           EXTERNAL_CHECKBOX=$(echo "${{ github.event.issue.body }}" | awk 'NR == 7 {print substr($0, 3, 3)}')
           INTERNAL_CHECKBOX=$(echo "${{ github.event.issue.body }}" | awk 'NR == 8 {print substr($0, 3, 3)}')
-          EXTERNAL_KEY="None"
           INTERNAL_KEY="None"
           echo "$PROJECT_NAME"
+          if [[ "${EXTERNAL_CHECKBOX}" == "[X]" ]]; then
+            EXTERNAL_KEY="external-hatch-${PROJECT_NAME}"
+          else
+            EXTERNAL_KEY="None"
+          fi
+          if [[ "${EXTERNAL_CHECKBOX}" == "[X]" ]]; then
+            INTERNAL_KEY="external-hatch-${PROJECT_NAME}"
+          else
+            INTERNAL_KEY="None"
+          fi
           echo "$EXTERNAL_KEY"
           echo "$INTERNAL_KEY"
-          if [[ "${EXTERNAL_CHECKBOX}" == "[X]" ]]; then
-            echo "external"
-          fi
