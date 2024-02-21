@@ -16,7 +16,7 @@ jobs:
         run: |
           PROJECT_NAME=$(echo "${{ github.event.issue.body }}" | awk 'NR == 3')
           EXTERNAL_CHECKBOX=$(echo "${{ github.event.issue.body }}" | awk 'NR == 7 {print substr($0, 3, 3)}')
-          EXTERNAL=$(echo "${{ github.event.issue.body }}" | awk 'NR == 7 {if (substr($0, 1, 3) == "[X]") print substr($0, 5)}')
+          EXTERNAL=$(echo "${{ github.event.issue.body }}" | awk 'NR == 7 {if (substr($0, 3, 3) == "[X]") print substr($0, 5)}')
           INTERNAL_CHECKBOX=$(echo "${{ github.event.issue.body }}" | awk 'NR == 8 {print substr($0, 3, 3)}')
           echo "$PROJECT_NAME"
           echo "$EXTERNAL"
