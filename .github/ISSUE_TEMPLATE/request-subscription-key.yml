@@ -12,8 +12,6 @@ body:
     - dcvxבלה
     - vladliel
     - tash
-    - "מערכת הקריאה\t"
-    - "אתר המילואים\t"
     - luzonb2r
     - dבלה
     - dcבלה
@@ -34,6 +32,7 @@ body:
     - שוב קורונה
     - מפקדים
     - secproj
+    - מערכת הקריאה
     - ii
     - דרישופ
     - dcבלה
@@ -46,6 +45,7 @@ body:
     - דוח 1
     - hatch
     - קודקוד
+    - אתר המילואים
   validations:
     required: true
 - type: checkboxes

@@ -44,6 +44,7 @@ def update_issue_template(project_list):
                     if object['id'] == 'project-name'][0]
     projects_object['attributes']['options'] = project_list
     issue_yaml = yaml.dump(json_template, sort_keys=False, allow_unicode=True)
+    print(issue_yaml)
     print('Updating issue template file...')
     update_issue_template_file_content(issue_yaml)
 
