@@ -9,6 +9,7 @@ body:
   attributes:
     label: "Select project name\U0001F4DD"
     options:
+    - dada
     # - "dcvx\u05D1\u05DC\u05D4"
     # - vladliel
     # - tash
