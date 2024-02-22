@@ -15,6 +15,16 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      - name: Create subscription keys
+        id: create-subscription-keys
+        run: |
+          PROJECT_NAME=$(echo "${{ github.event.issue.body }}" | awk 'NR == 3')
+          echo "preprod-external-key=$PROJECT_NAME" >> $GITHUB_OUTPUT
+
+      - name: Comment subscription keys
+        run: |
+          gh issue comment ${{ github.event.issue.html_url }} -b "${{ steps.create-subscription-keys.outputs.preprod-external-key }}"  
+
       # - name: Set up Python
       #   uses: actions/setup-python@v2
       #   with:
@@ -77,12 +87,12 @@ jobs:
       #       fi
       #     fi
 
-      - name: Create subscription keys
-        id: create-subscription-keys
-        run: |
-          PROJECT_NAME=$(echo "${{ github.event.issue.body }}" | awk 'NR == 3')
-          echo "::set-output name=preprod-external-key::$PROJECT_NAME"
+      # - name: Create subscription keys
+      #   id: create-subscription-keys
+      #   run: |
+      #     PROJECT_NAME=$(echo "${{ github.event.issue.body }}" | awk 'NR == 3')
+      #     echo "::set-output name=preprod-external-key::$PROJECT_NAME"
 
-      - name: Comment subscription keys
-        run: |
-          gh issue comment ${{ github.event.issue.html_url }}  -b "${{ steps.create-subscription-keys.outputs.preprod-external-key }}"  
+      # - name: Comment subscription keys
+      #   run: |
+      #     gh issue comment ${{ github.event.issue.html_url }} -b "${{ steps.create-subscription-keys.outputs.preprod-external-key }}"  
