@@ -1,4 +1,4 @@
-name: Create subscription key after issue created
+name: Create subscription key and add it to db after issue created
 
 on:
   issues:
@@ -19,8 +19,8 @@ jobs:
 
       - name: Install dependencies
         run: pip install -r requirements.txt
-
-      - name: Create subscription keys
+      
+      - name: Get issue body data
         run: |
           PROJECT_NAME=$(echo "${{ github.event.issue.body }}" | awk 'NR == 3')
           PROJECT_KEY_NAME=$(echo "${{ github.event.issue.body }}" | awk 'NR == 7')
@@ -30,31 +30,79 @@ jobs:
           INTERNAL_CHECKBOX=$(echo "${{ github.event.issue.body }}" | awk 'NR == 17 {print substr($0, 3, 3)}')
           PROJECT_OFFICER_NAME=$(echo "${{ github.event.issue.body }}" | awk 'NR == 21')
           PROJECT_OFFICER_PHONE=$(echo "${{ github.event.issue.body }}" | awk 'NR == 25')
-          echo "$PROJECT_NAME"
-          echo "$PROJECT_KEY_NAME"
-          echo "$PREPROD_CHECKBOX"
-          echo "$PROD_CHECKBOX"
-          echo "$EXTERNAL_CHECKBOX"
-          echo "$INTERNAL_CHECKBOX"
-          echo "$PROJECT_OFFICER_NAME"
-          echo "$PROJECT_OFFICER_PHONE"
-          if [[ "${EXTERNAL_CHECKBOX}" == "[X]" ]]; then
-            python create-subscription-key.py --tenant-id "${{ vars.TENANT_ID }}" \
-              --subscription-id "${{ vars.SUBSCRIPTION_ID }}" \
-              --apim-rg-name "${{ vars.RESOURCE_GROUP }}" \
-              --apim-name "${{ vars.APIM_NAME }}" \
-              --client-id "${{ vars.CLIENT_ID }}" \
-              --client-secret "${{ secrets.CLIENT_SECRET }}" \
-              --subscription-key-name "${PROJECT_NAME}-external-hatch" \
-              --product-name "${{ env.EXTERNAL_PRODUCT }}" \
-            
-            echo "EXTERNAL_KEY_NAME=${PROJECT_NAME}-external-hatch" >> ${GITHUB_ENV}
-          fi
-          if [[ "${INTERNAL_CHECKBOX}" == "[X]" ]]; then
-            echo "INTERNAL_KEY_NAME=${PROJECT_NAME}-internal-hatch" >> ${GITHUB_ENV}
-          fi
-
-      - name: Print keys
+        
+      - name: Print data
         run: |
-          echo "${{ env.EXTERNAL_KEY_NAME }}"
-          echo "${{ env.INTERNAL_KEY_NAME }}"
+          echo "${PROJECT_NAME}"
+          echo "${PROJECT_KEY_NAME}"
+
+
+      # - name: Create subscription keys
+      #   run: |
+      #     PROJECT_NAME=$(echo "${{ github.event.issue.body }}" | awk 'NR == 3')
+      #     PROJECT_KEY_NAME=$(echo "${{ github.event.issue.body }}" | awk 'NR == 7')
+      #     PREPROD_CHECKBOX=$(echo "${{ github.event.issue.body }}" | awk 'NR == 11 {print substr($0, 3, 3)}')
+      #     PROD_CHECKBOX=$(echo "${{ github.event.issue.body }}" | awk 'NR == 12 {print substr($0, 3, 3)}')
+      #     EXTERNAL_CHECKBOX=$(echo "${{ github.event.issue.body }}" | awk 'NR == 16 {print substr($0, 3, 3)}')
+      #     INTERNAL_CHECKBOX=$(echo "${{ github.event.issue.body }}" | awk 'NR == 17 {print substr($0, 3, 3)}')
+      #     PROJECT_OFFICER_NAME=$(echo "${{ github.event.issue.body }}" | awk 'NR == 21')
+      #     PROJECT_OFFICER_PHONE=$(echo "${{ github.event.issue.body }}" | awk 'NR == 25')
+      #     if [[ "${PREPROD_CHECKBOX}" == "[X]" ]]; then
+      #       if [[ "${EXTERNAL_CHECKBOX}" == "[X]" ]]; then
+      #         python create-subscription-key.py --tenant-id "${{ vars.TENANT_ID }}" \
+      #           --subscription-id "${{ vars.SUBSCRIPTION_ID }}" \
+      #           --apim-rg-name "${{ vars.RESOURCE_GROUP }}" \
+      #           --apim-name "${{ vars.APIM_NAME }}" \
+      #           --client-id "${{ vars.CLIENT_ID }}" \
+      #           --client-secret "${{ secrets.CLIENT_SECRET }}" \
+      #           --subscription-key-name "${PROJECT_KEY_NAME}-preprod-external-hatch" \
+      #           --product-name "${{ env.EXTERNAL_PRODUCT }}" \
+      #       fi
+      #       if [[ "${INTERNAL_CHECKBOX}" == "[X]" ]]; then
+      #         python create-subscription-key.py --tenant-id "${{ vars.TENANT_ID }}" \
+      #           --subscription-id "${{ vars.SUBSCRIPTION_ID }}" \
+      #           --apim-rg-name "${{ vars.RESOURCE_GROUP }}" \
+      #           --apim-name "${{ vars.APIM_NAME }}" \
+      #           --client-id "${{ vars.CLIENT_ID }}" \
+      #           --client-secret "${{ secrets.CLIENT_SECRET }}" \
+      #           --subscription-key-name "${PROJECT_KEY_NAME}-preprod-internal-hatch" \
+      #           --product-name "${{ env.INTERNAL_PRODUCT }}" \
+      #       fi
+      #     fi
+      #     if [[ "${PROD_CHECKBOX}" == "[X]" ]]; then
+      #       if [[ "${EXTERNAL_CHECKBOX}" == "[X]" ]]; then
+      #         python create-subscription-key.py --tenant-id "${{ vars.TENANT_ID }}" \
+      #           --subscription-id "${{ vars.SUBSCRIPTION_ID }}" \
+      #           --apim-rg-name "${{ vars.RESOURCE_GROUP }}" \
+      #           --apim-name "${{ vars.APIM_NAME }}" \
+      #           --client-id "${{ vars.CLIENT_ID }}" \
+      #           --client-secret "${{ secrets.CLIENT_SECRET }}" \
+      #           --subscription-key-name "${PROJECT_KEY_NAME}-prod-external-hatch" \
+      #           --product-name "${{ env.EXTERNAL_PRODUCT }}" \
+      #       fi
+      #       if [[ "${INTERNAL_CHECKBOX}" == "[X]" ]]; then
+      #         python create-subscription-key.py --tenant-id "${{ vars.TENANT_ID }}" \
+      #           --subscription-id "${{ vars.SUBSCRIPTION_ID }}" \
+      #           --apim-rg-name "${{ vars.RESOURCE_GROUP }}" \
+      #           --apim-name "${{ vars.APIM_NAME }}" \
+      #           --client-id "${{ vars.CLIENT_ID }}" \
+      #           --client-secret "${{ secrets.CLIENT_SECRET }}" \
+      #           --subscription-key-name "${PROJECT_KEY_NAME}-prod-internal-hatch" \
+      #           --product-name "${{ env.INTERNAL_PRODUCT }}" \
+      #       fi
+      #     fi
+
+
+
+      #     if [[ "${EXTERNAL_CHECKBOX}" == "[X]" ]]; then
+            
+      #       echo "EXTERNAL_KEY_NAME=${PROJECT_NAME}-external-hatch" >> ${GITHUB_ENV}
+      #     fi
+      #     if [[ "${INTERNAL_CHECKBOX}" == "[X]" ]]; then
+      #       echo "INTERNAL_KEY_NAME=${PROJECT_NAME}-internal-hatch" >> ${GITHUB_ENV}
+      #     fi
+
+      # - name: Print keys
+      #   run: |
+      #     echo "${{ env.EXTERNAL_KEY_NAME }}"
+      #     echo "${{ env.INTERNAL_KEY_NAME }}"
