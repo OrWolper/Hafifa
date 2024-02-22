@@ -74,6 +74,6 @@ body:
   id: project-officer-phone
   attributes:
     label: Enter project officer phone number📱
-    description: Must be written in english.
+    description: Must be numbers.
   validations:
     required: true

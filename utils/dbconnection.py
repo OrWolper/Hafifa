@@ -31,7 +31,7 @@ class DbConnection:
             projectList = []
 
             for row in rows:
-                projectList.append(row[0].lower())
+                projectList.append(row[0])
                 
             cursor.close()
         except Exception as e:
