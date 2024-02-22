@@ -9,43 +9,9 @@ body:
   attributes:
     label: "Select project name\U0001F4DD"
     options:
-    - "dcvx\u05D1\u05DC\u05D4"
+    - כעגעגע
     - vladliel
     - tash
-    - "\u05DE\u05E2\u05E8\u05DB\u05EA \u05D4\u05E7\u05E8\u05D9\u05D0\u05D4\t"
-    - "\u05D0\u05EA\u05E8 \u05D4\u05DE\u05D9\u05DC\u05D5\u05D0\u05D9\u05DD\t"
-    - luzonb2r
-    - "d\u05D1\u05DC\u05D4"
-    - "dc\u05D1\u05DC\u05D4"
-    - "dc\u05D1\u05DC\u05D4"
-    - "dc\u05D1\u05DC\u05D4"
-    - "dc\u05D1\u05DC\u05D4"
-    - "dc\u05D1\u05DC\u05D4"
-    - "dc\u05D1\u05DC\u05D4"
-    - "dc\u05D1\u05DC\u05D4"
-    - "dc\u05D1\u05DC\u05D4"
-    - "\u05DC\u05D5\u05DE\u05D3\u05D5\u05EA"
-    - cpr-go
-    - shuttle
-    - "\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8"
-    - adi
-    - "\u05E7\u05D1\u05E6\u05D9 \u05DE\u05D5\u05E7\u05D3\u05D9\u05DD"
-    - "\u05E4\u05D8\u05E8\u05D5\u05DC"
-    - "\u05E9\u05D5\u05D1 \u05E7\u05D5\u05E8\u05D5\u05E0\u05D4"
-    - "\u05DE\u05E4\u05E7\u05D3\u05D9\u05DD"
-    - secproj
-    - ii
-    - "\u05D3\u05E8\u05D9\u05E9\u05D5\u05E4"
-    - "dc\u05D1\u05DC\u05D4"
-    - "\u05DB\u05E8\u05D8\u05D9\u05E1 \u05E2\u05D1\u05D5\u05D3\u05D4"
-    - lielg
-    - "dc\u05D1\u05DC\u05D4"
-    - "\u05E7\u05D9\u05D8\u05D1\u05D2"
-    - "sfdfsdfscvx\u05D1\u05DC\u05D4"
-    - "\u05DB\u05E8\u05D8\u05D9\u05E1 \u05E2\u05D1\u05D5\u05D3\u05D4"
-    - "\u05D3\u05D5\u05D7 1"
-    - hatch
-    - "\u05E7\u05D5\u05D3\u05E7\u05D5\u05D3"
   validations:
     required: true
 - type: checkboxes
