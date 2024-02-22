@@ -49,6 +49,10 @@ def update_issue_template(project_list):
     update_issue_template_file_content(issue_yaml)
 
 def main():
+    """
+       Update the project list in the issue template
+    """
+
     dbConnection = DbConnection(DB_HOST, DB_NAME, DB_USER, DB_PASSWORD, SSL_MODE)
     project_list = dbConnection.get_projects_names()
     update_issue_template(project_list)

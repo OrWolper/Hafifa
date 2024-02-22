@@ -37,6 +37,23 @@ body:
     - אתר המילואים
   validations:
     required: true
+- type: input
+  id: project-key-name
+  attributes:
+    label: Enter project key name🔑
+    description: Must be written in english.
+  validations:
+    required: true
+- type: checkboxes
+  id: deployment-environment
+  attributes:
+    label: Which deployment environments do you want to create a key for?💻
+    description: You may select more than one.
+    options:
+    - label: preprod
+    - label: prod
+  validations:
+    required: true
 - type: checkboxes
   id: api-environment
   attributes:
