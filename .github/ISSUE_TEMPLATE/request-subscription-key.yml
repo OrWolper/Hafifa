@@ -10,6 +10,8 @@ body:
     label: Select project name📝
     options:
     - ffגג
+    - עגע
+    - sfs
   validations:
     required: true
 - type: checkboxes
