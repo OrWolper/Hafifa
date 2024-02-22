@@ -39,10 +39,12 @@ def update_issue_template(project_list):
     print('Reading issue template file...')
     issue_file_content = get_issues_template_file_content()
     json_template = json.loads(yaml_to_json(issue_file_content))
+    print(json_template)
     projects_object = [object for object in json_template['body']
                     if object['id'] == 'project-name'][0]
     projects_object['attributes']['options'] = project_list
     issue_yaml = yaml.dump(json_template, sort_keys=False)
+    print(projects_object)
     print('Updating issue template file...')
     update_issue_template_file_content(issue_yaml)
 
