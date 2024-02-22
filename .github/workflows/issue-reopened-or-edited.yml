@@ -10,7 +10,7 @@ env:
 jobs:
   close-issue:
     runs-on: ubuntu-latest
-    permissions: write
+    permissions: write-all
     steps:
       - uses: actions/checkout@v2
 
