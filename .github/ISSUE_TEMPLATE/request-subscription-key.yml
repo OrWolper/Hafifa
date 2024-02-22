@@ -64,3 +64,16 @@ body:
     - label: internal
   validations:
     required: true
+- type: input
+  id: project-officer-name
+  attributes:
+    label: Enter project officer name👨‍💻👩‍💻
+  validations:
+    required: true
+- type: input
+  id: project-officer-phone
+  attributes:
+    label: Enter project officer phone number📱
+    description: Must be written in english.
+  validations:
+    required: true
