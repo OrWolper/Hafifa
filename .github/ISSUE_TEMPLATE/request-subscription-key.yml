@@ -9,43 +9,7 @@ body:
   attributes:
     label: Select project name📝
     options:
-    - dcvxבלה
-    - vladliel
-    - tash
-    - luzonb2r
-    - dבלה
-    - dcבלה
-    - dcבלה
-    - dcבלה
-    - dcבלה
-    - dcבלה
-    - dcבלה
-    - dcבלה
-    - dcבלה
-    - לומדות
-    - cpr-go
-    - shuttle
-    - פרויקט
-    - adi
-    - קבצי מוקדים
-    - פטרול
-    - שוב קורונה
-    - מפקדים
-    - secproj
-    - מערכת הקריאה
-    - ii
-    - דרישופ
-    - dcבלה
-    - כרטיס עבודה
-    - lielg
-    - dcבלה
-    - קיטבג
-    - sfdfsdfscvxבלה
-    - כרטיס עבודה
-    - דוח 1
-    - hatch
-    - קודקוד
-    - אתר המילואים
+    - ffגג
   validations:
     required: true
 - type: checkboxes
