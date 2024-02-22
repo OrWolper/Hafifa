@@ -1,23 +1,57 @@
-name: "Request a subscription key\U0001F511"
+name: Request a subscription key🔑
 description: Request a subscription key for the Tzohar Digitali API Management
 title: '[Request a subscription key]: '
 labels:
-- "Subscription Key Request\U0001F511"
+- Subscription Key Request🔑
 body:
 - type: dropdown
   id: project-name
   attributes:
-    label: "Select project name\U0001F4DD"
+    label: Select project name📝
     options:
-    - כעגעגע
+    - dcvxבלה
     - vladliel
     - tash
+    - "מערכת הקריאה\t"
+    - "אתר המילואים\t"
+    - luzonb2r
+    - dבלה
+    - dcבלה
+    - dcבלה
+    - dcבלה
+    - dcבלה
+    - dcבלה
+    - dcבלה
+    - dcבלה
+    - dcבלה
+    - לומדות
+    - cpr-go
+    - shuttle
+    - פרויקט
+    - adi
+    - קבצי מוקדים
+    - פטרול
+    - שוב קורונה
+    - מפקדים
+    - secproj
+    - ii
+    - דרישופ
+    - dcבלה
+    - כרטיס עבודה
+    - lielg
+    - dcבלה
+    - קיטבג
+    - sfdfsdfscvxבלה
+    - כרטיס עבודה
+    - דוח 1
+    - hatch
+    - קודקוד
   validations:
     required: true
 - type: checkboxes
   id: api-environment
   attributes:
-    label: "Which api environments do you want to create a key for?\U0001F310"
+    label: Which api environments do you want to create a key for?🌐
     description: You may select more than one.
     options:
     - label: external
