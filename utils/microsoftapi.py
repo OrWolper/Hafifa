@@ -31,8 +31,7 @@ class MicrosoftAPIAgent:
             'Content-Type': 'application/x-www-form-urlencoded',
         }
 
-        response = requests.request(
-            "POST", url, headers=headers, data=data, timeout=30)
+        response = requests.request("POST", url, headers=headers, data=data, timeout=30)
 
         return response.json()["access_token"]
 
