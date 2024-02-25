@@ -31,6 +31,7 @@ def main(project_name = None, key = None, is_prod = None):
     if not is_prod:
         raise Exception('Is prod is missing')
 
+    print(f"project_name: {project_name} \nkey: {key} \nis_prod: {is_prod}")
     dbConnection = DbConnection(DB_HOST, DB_NAME, DB_USER, DB_PASSWORD, SSL_MODE)
     dbConnection.add_new_key(project_name, key, is_prod)
 
