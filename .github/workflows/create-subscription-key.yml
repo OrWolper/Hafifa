@@ -29,7 +29,7 @@ jobs:
           PROJECT_NAME=$(echo "${{ github.event.issue.body }}" | awk 'NR == 3')
           PREPROD_EXTERNAL_KEY="123456789"
 
-          python add-ket-to-db.py \
+          python add-key-to-db.py \
             --project-name "$PROJECT_NAME" \
             --key "$PREPROD_EXTERNAL_KEY" \
             --is-prod false \
