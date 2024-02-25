@@ -9,91 +9,150 @@ env:
   GH_TOKEN: ${{ github.token }}
 
 jobs:
-  create-subscription-key:
+  create-and-save-data-of-subscription-key:
     runs-on: ubuntu-latest
     permissions: write-all
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Create subscription keys
-        id: create-subscription-keys
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.x
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Create subscription keys and add them to db
         run: |
+          add_key_to_db() {
+            python add-ket-to-db.py \
+              --project-name "${{ PROJECT_NAME }}" \
+              --key $1 \
+              --is-prod $2 \
+          }
+
           PROJECT_NAME=$(echo "${{ github.event.issue.body }}" | awk 'NR == 3')
-          echo "preprod-external-key=$PROJECT_NAME" >> $GITHUB_OUTPUT
+          PREPROD_EXTERNAL_KEY="123456789"
+          add_key_to_db $PREPROD_EXTERNAL_KEY false
 
-      - name: Comment subscription keys
-        run: |
-          gh issue comment ${{ github.event.issue.html_url }} -b "${{ steps.create-subscription-keys.outputs.preprod-external-key }}"  
-
-      # - name: Set up Python
-      #   uses: actions/setup-python@v2
-      #   with:
-      #     python-version: 3.x
-
-      # - name: Install dependencies
-      #   run: pip install -r requirements.txt
-
-      # - name: Create subscription keys
-      #   id: create-subscription-keys
+      # - name: Create subscription keys and add them to db
       #   run: |
+      #     create_subscription_key() {
+      #       python create-subscription-key.py \
+      #         --tenant-id "${{ vars.TENANT_ID }}" \
+      #         --subscription-id "${{ vars.SUBSCRIPTION_ID }}" \
+      #         --apim-rg-name "${{ vars.RESOURCE_GROUP }}" \
+      #         --apim-name "${{ vars.APIM_NAME }}" \
+      #         --client-id "${{ vars.CLIENT_ID }}" \
+      #         --client-secret "${{ secrets.CLIENT_SECRET }}" \
+      #         --subscription-key-name "${PROJECT_KEY_NAME}-$1-$2" \
+      #         --product-name "${{ secrets.$3_PRODUCT }}"
+      #     }
+
+      #     add_key_to_db() {
+      #       python add-ket-to-db.py \
+      #         --project-name "${{ PROJECT_NAME }}" \
+      #         --key $1 \
+      #         --is-prod $2 \
+      #     }
+
       #     PROJECT_NAME=$(echo "${{ github.event.issue.body }}" | awk 'NR == 3')
       #     PROJECT_KEY_NAME=$(echo "${{ github.event.issue.body }}" | awk 'NR == 7')
       #     PREPROD_CHECKBOX=$(echo "${{ github.event.issue.body }}" | awk 'NR == 11 {print substr($0, 3, 3)}')
       #     PROD_CHECKBOX=$(echo "${{ github.event.issue.body }}" | awk 'NR == 12 {print substr($0, 3, 3)}')
       #     EXTERNAL_CHECKBOX=$(echo "${{ github.event.issue.body }}" | awk 'NR == 16 {print substr($0, 3, 3)}')
       #     INTERNAL_CHECKBOX=$(echo "${{ github.event.issue.body }}" | awk 'NR == 17 {print substr($0, 3, 3)}')
+
       #     if [[ "${PREPROD_CHECKBOX}" == "[X]" ]]; then
       #       if [[ "${EXTERNAL_CHECKBOX}" == "[X]" ]]; then
-      #         preprod-external-key=$(python create-subscription-key.py --tenant-id "${{ vars.TENANT_ID }}" \
-      #           --subscription-id "${{ vars.SUBSCRIPTION_ID }}" \
-      #           --apim-rg-name "${{ vars.RESOURCE_GROUP }}" \
-      #           --apim-name "${{ vars.APIM_NAME }}" \
-      #           --client-id "${{ vars.CLIENT_ID }}" \
-      #           --client-secret "${{ secrets.CLIENT_SECRET }}" \
-      #           --subscription-key-name "${PROJECT_KEY_NAME}-preprod-external-hatch" \
-      #           --product-name "${{ secrets.EXTERNAL_PRODUCT }}" \)
+      #         PREPROD_EXTERNAL_KEY=$(create_subscription_key preprod external-hatch EXTERNAL)
+      #         add_key_to_db $PREPROD_EXTERNAL_KEY false
       #       fi
       #       if [[ "${INTERNAL_CHECKBOX}" == "[X]" ]]; then
-      #         preprod-internal-key=$(python create-subscription-key.py --tenant-id "${{ vars.TENANT_ID }}" \
-      #           --subscription-id "${{ vars.SUBSCRIPTION_ID }}" \
-      #           --apim-rg-name "${{ vars.RESOURCE_GROUP }}" \
-      #           --apim-name "${{ vars.APIM_NAME }}" \
-      #           --client-id "${{ vars.CLIENT_ID }}" \
-      #           --client-secret "${{ secrets.CLIENT_SECRET }}" \
-      #           --subscription-key-name "${PROJECT_KEY_NAME}-preprod-internal-hatch" \
-      #           --product-name "${{ secrets.INTERNAL_PRODUCT }}" \)
+      #         PREPROD_INTERNAL_KEY=$(create_subscription_key preprod internal-hatch INTERNAL)
+      #         add_key_to_db $PREPROD_INTERNAL_KEY false
       #       fi
       #     fi
+
       #     if [[ "${PROD_CHECKBOX}" == "[X]" ]]; then
       #       if [[ "${EXTERNAL_CHECKBOX}" == "[X]" ]]; then
-      #         prod-external-key=$(python create-subscription-key.py --tenant-id "${{ vars.TENANT_ID }}" \
-      #           --subscription-id "${{ vars.SUBSCRIPTION_ID }}" \
-      #           --apim-rg-name "${{ vars.RESOURCE_GROUP }}" \
-      #           --apim-name "${{ vars.APIM_NAME }}" \
-      #           --client-id "${{ vars.CLIENT_ID }}" \
-      #           --client-secret "${{ secrets.CLIENT_SECRET }}" \
-      #           --subscription-key-name "${PROJECT_KEY_NAME}-prod-external-hatch" \
-      #           --product-name "${{ secrets.EXTERNAL_PRODUCT }}" \)
+      #         PROD_EXTERNAL_KEY=$(create_subscription_key prod external-hatch EXTERNAL)
+      #         add_key_to_db $PROD_EXTERNAL_KEY true
       #       fi
       #       if [[ "${INTERNAL_CHECKBOX}" == "[X]" ]]; then
-      #         prod-internal-key=$(python create-subscription-key.py --tenant-id "${{ vars.TENANT_ID }}" \
-      #           --subscription-id "${{ vars.SUBSCRIPTION_ID }}" \
-      #           --apim-rg-name "${{ vars.RESOURCE_GROUP }}" \
-      #           --apim-name "${{ vars.APIM_NAME }}" \
-      #           --client-id "${{ vars.CLIENT_ID }}" \
-      #           --client-secret "${{ secrets.CLIENT_SECRET }}" \
-      #           --subscription-key-name "${PROJECT_KEY_NAME}-prod-internal-hatch" \
-      #           --product-name "${{ secrets.INTERNAL_PRODUCT }}" \)
+      #         PROD_INTERNAL_KEY=$(create_subscription_key prod internal-hatch INTERNAL)
+      #         add_key_to_db $PROD_INTERNAL_KEY true
       #       fi
       #     fi
 
       # - name: Create subscription keys
       #   id: create-subscription-keys
       #   run: |
-      #     PROJECT_NAME=$(echo "${{ github.event.issue.body }}" | awk 'NR == 3')
-      #     echo "::set-output name=preprod-external-key::$PROJECT_NAME"
+      #     create_subscription_key() {
+      #       python create-subscription-key.py \
+      #         --tenant-id "${{ vars.TENANT_ID }}" \
+      #         --subscription-id "${{ vars.SUBSCRIPTION_ID }}" \
+      #         --apim-rg-name "${{ vars.RESOURCE_GROUP }}" \
+      #         --apim-name "${{ vars.APIM_NAME }}" \
+      #         --client-id "${{ vars.CLIENT_ID }}" \
+      #         --client-secret "${{ secrets.CLIENT_SECRET }}" \
+      #         --subscription-key-name "${PROJECT_KEY_NAME}-$1-$2" \
+      #         --product-name "${{ secrets.$3_PRODUCT }}"
+      #     }
 
-      # - name: Comment subscription keys
-      #   run: |
-      #     gh issue comment ${{ github.event.issue.html_url }} -b "${{ steps.create-subscription-keys.outputs.preprod-external-key }}"  
+      #     PROJECT_KEY_NAME=$(echo "${{ github.event.issue.body }}" | awk 'NR == 7')
+      #     PREPROD_CHECKBOX=$(echo "${{ github.event.issue.body }}" | awk 'NR == 11 {print substr($0, 3, 3)}')
+      #     PROD_CHECKBOX=$(echo "${{ github.event.issue.body }}" | awk 'NR == 12 {print substr($0, 3, 3)}')
+      #     EXTERNAL_CHECKBOX=$(echo "${{ github.event.issue.body }}" | awk 'NR == 16 {print substr($0, 3, 3)}')
+      #     INTERNAL_CHECKBOX=$(echo "${{ github.event.issue.body }}" | awk 'NR == 17 {print substr($0, 3, 3)}')
+
+      #     if [[ "${PREPROD_CHECKBOX}" == "[X]" ]]; then
+      #       if [[ "${EXTERNAL_CHECKBOX}" == "[X]" ]]; then
+      #         PREPROD_EXTERNAL_KEY=$(create_subscription_key preprod external-hatch EXTERNAL)
+      #         echo "preprod-external-key=$PREPROD_EXTERNAL_KEY" >> $GITHUB_OUTPUT
+      #       fi
+      #       if [[ "${INTERNAL_CHECKBOX}" == "[X]" ]]; then
+      #         PREPROD_INTERNAL_KEY=$(create_subscription_key preprod internal-hatch INTERNAL)
+      #         echo "preprod-internal-key=$PREPROD_INTERNAL_KEY" >> $GITHUB_OUTPUT
+      #       fi
+      #     fi
+
+      #     if [[ "${PROD_CHECKBOX}" == "[X]" ]]; then
+      #       if [[ "${EXTERNAL_CHECKBOX}" == "[X]" ]]; then
+      #         PROD_EXTERNAL_KEY=$(create_subscription_key prod external-hatch EXTERNAL)
+      #         echo "prod-external-key=$PROD_EXTERNAL_KEY" >> $GITHUB_OUTPUT
+      #       fi
+      #       if [[ "${INTERNAL_CHECKBOX}" == "[X]" ]]; then
+      #         PROD_INTERNAL_KEY=$(create_subscription_key prod internal-hatch INTERNAL)
+      #         echo "prod-internal-key=$PROD_INTERNAL_KEY" >> $GITHUB_OUTPUT
+      #       fi
+      #     fi
+        
+        # - name: Add subscription keys to database
+        #   run: |
+        #     add_key_to_db() {
+        #       python add-ket-to-db.py \
+        #         --project-name "${{ PROJECT_NAME }}" \
+        #         --key $1 \
+        #         --is-prod $2 \
+        #     }
+
+        #     PROJECT_NAME=$(echo "${{ github.event.issue.body }}" | awk 'NR == 3')
+
+        #     if [[ -n "${{ steps.create-subscription-keys.outputs.preprod-external-key }}" ]]; then
+        #       create_subscription_key ${{ steps.create-subscription-keys.outputs.preprod-external-key }} false
+        #     fi
+
+        #     if [[ -n "${{ steps.create-subscription-keys.outputs.preprod-external-key }}" ]]; then
+        #       create_subscription_key ${{ steps.create-subscription-keys.outputs.preprod-internal-key }} false
+        #     fi
+
+        #     if [[ -n "${{ steps.create-subscription-keys.outputs.preprod-external-key }}" ]]; then
+        #       create_subscription_key ${{ steps.create-subscription-keys.outputs.prod-external-key }} true
+        #     fi
+
+        #     if [[ -n "${{ steps.create-subscription-keys.outputs.preprod-external-key }}" ]]; then
+        #       create_subscription_key ${{ steps.create-subscription-keys.outputs.prod-internal-key }} true
+        #     fi

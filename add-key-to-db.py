@@ -1,4 +1,5 @@
 import os
+import click
 from dotenv import load_dotenv
 from utils.dbconnection import DbConnection
 
@@ -11,9 +12,14 @@ DB_USER = os.getenv('DB_USER')
 DB_PASSWORD = os.getenv('DB_PASSWORD')
 SSL_MODE = os.getenv('SSL_MODE')
 
+@click.command()
+@click.option('--project-name', '-pn', help='Project Name')
+@click.option('--key', '-k', help='Subscription Key')
+@click.option('--is-prod', '-ip', help='Is the project is prod')
+
 def main(project_name = None, key = None, is_prod = None):
     """
-       Add a new key to the database
+       Add new key to the database
     """
 
     if not project_name:
