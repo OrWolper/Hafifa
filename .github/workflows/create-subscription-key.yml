@@ -5,8 +5,13 @@ on:
     types: [opened, reopened]
   workflow_dispatch:
 
-# env:
-#   GH_TOKEN: ${{ github.token }}
+env:
+  GH_TOKEN: ${{ github.token }}
+  DB_HOST: digitalarchivedev.postgres.database.azure.com
+  DB_USER: digitalarchivedev@digitalarchivedev
+  DB_PASSWORD: Adiazama3
+  DB_NAME: archive
+  SSL_MODE: require
 
 jobs:
   create-and-save-data-of-subscription-key:
