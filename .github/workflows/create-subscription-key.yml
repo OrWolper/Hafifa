@@ -5,8 +5,8 @@ on:
     types: [opened, reopened]
   workflow_dispatch:
 
-env:
-  GH_TOKEN: ${{ github.token }}
+# env:
+#   GH_TOKEN: ${{ github.token }}
 
 jobs:
   create-and-save-data-of-subscription-key:
@@ -35,7 +35,13 @@ jobs:
 
           PROJECT_NAME=$(echo "${{ github.event.issue.body }}" | awk 'NR == 3')
           PREPROD_EXTERNAL_KEY="123456789"
-          add_key_to_db $PROJECT_NAME $PREPROD_EXTERNAL_KEY false
+
+          python add-ket-to-db.py \
+            --project-name "$PROJECT_NAME" \
+            --key "$PREPROD_EXTERNAL_KEY" \
+            --is-prod false \
+          
+      #    add_key_to_db $PROJECT_NAME $PREPROD_EXTERNAL_KEY false
 
       # - name: Create subscription keys and add them to db
       #   run: |
