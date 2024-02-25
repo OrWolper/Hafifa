@@ -48,6 +48,11 @@ jobs:
             echo "$1"
             echo "$2"
             echo "$PROJECT_NAME"
+            
+            python add-key-to-db.py \
+              --project-name "$PROJECT_NAME" \
+              --key "$1" \
+              --is-prod "$2" \
           }
           
           add_key_to_db $PREPROD_EXTERNAL_KEY false
