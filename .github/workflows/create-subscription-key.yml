@@ -26,13 +26,6 @@ jobs:
 
       - name: Create subscription keys and add them to db
         run: |
-          add_key_to_db() {
-            python add-ket-to-db.py \
-              --project-name $1 \
-              --key $2 \
-              --is-prod $3 \
-          }
-
           PROJECT_NAME=$(echo "${{ github.event.issue.body }}" | awk 'NR == 3')
           PREPROD_EXTERNAL_KEY="123456789"
 

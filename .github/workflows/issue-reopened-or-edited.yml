@@ -1,20 +1,20 @@
-name: Close issue if reopened or edited
+# name: Close issue if reopened or edited
 
-on:
-  issues:
-    types: [reopened, edited]
+# on:
+#   issues:
+#     types: [reopened, edited]
 
-env:
-  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+# env:
+#   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-jobs:
-  close-issue:
-    runs-on: ubuntu-latest
-    permissions: write-all
-    steps:
-      - uses: actions/checkout@v2
+# jobs:
+#   close-issue:
+#     runs-on: ubuntu-latest
+#     permissions: write-all
+#     steps:
+#       - uses: actions/checkout@v2
 
-      - name: Close issue    
-        run: |
-          gh issue comment ${{ github.event.issue.html_url }} -b "ERROR: Issue reopening or editing is not allowed ❗😟. Please open a new subscription key request issue."
-          gh issue close ${{ github.event.issue.html_url }} 
+#       - name: Close issue    
+#         run: |
+#           gh issue comment ${{ github.event.issue.html_url }} -b "ERROR: Issue reopening or editing is not allowed ❗😟. Please open a new subscription key request issue."
+#           gh issue close ${{ github.event.issue.html_url }} 
