@@ -35,7 +35,7 @@ jobs:
 
           add_key_to_db() {
             python add-ket-to-db.py \
-              --project-name "${{ PROJECT_NAME }}" \
+              --project-name "$PROJECT_NAME" \
               --key $1 \
               --is-prod $2 \
           }
