@@ -1,5 +1,6 @@
 import click
 from utils.microsoftapi import MicrosoftAPIAgent
+from utils.m import AzureManagement
 
 # TODO - add user_id
 
@@ -46,6 +47,9 @@ def main(tenant_id=None, subscription_id=None, apim_rg_name=None, apim_name=None
     
     microsoft_api = MicrosoftAPIAgent(tenant_id, client_id, client_secret)
     microsoft_api.create_subscription_key(subscription_id, apim_rg_name, apim_name, product_name, subscription_key_name, id_name = None)
+
+    azure_management = AzureManagement(tenant_id, client_id, client_secret)
+    azure_management.creat_subscription(apim_rg_name, apim_name, subscription_id, product_name, subscription_key_name, id_name = None)
 
     print(f"Subscription Key {subscription_key_name} created successfully")
 

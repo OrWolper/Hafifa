@@ -62,7 +62,11 @@ jobs:
           PROJECT_NAME=$(echo "${{ github.event.issue.body }}" | awk 'NR == 3')
           PREPROD_EXTERNAL_KEY="123456789"
 
-          add_key_to_db() {         
+          add_key_to_db() {
+            echo "Current directory: $(pwd)"
+            ls -l
+            env
+            
             python add-key-to-db.py \
               --project-name "$PROJECT_NAME" \
               --key "12345" \
