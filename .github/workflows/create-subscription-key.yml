@@ -57,19 +57,27 @@ jobs:
           
       #     add_key_to_db $PREPROD_EXTERNAL_KEY false
 
-      - name: Create subscription keys and add them to db
+      # - name: Create subscription keys and add them to db (not working)
+      #   run: |
+      #     PROJECT_NAME=$(echo "${{ github.event.issue.body }}" | awk 'NR == 3')
+      #     PREPROD_EXTERNAL_KEY="123456789"
+
+      #     add_key_to_db() {
+      #       python add-key-to-db.py \
+      #         --project-name "$PROJECT_NAME" \
+      #         --key "12345" \
+      #         --is-prod "false" \
+      #     }
+          
+      #     add_key_to_db
+
+      - name: Create subscription keys and add them to db (not working)
         run: |
-          PROJECT_NAME=$(echo "${{ github.event.issue.body }}" | awk 'NR == 3')
-          PREPROD_EXTERNAL_KEY="123456789"
-
-          add_key_to_db() {
-            echo "Current directory: $(pwd)"
-            ls -l
-            env
-
+          ttt() {
+            python test.py
           }
           
-          add_key_to_db
+          ttt
 
       # - name: Create subscription keys and add them to db
       #   run: |
