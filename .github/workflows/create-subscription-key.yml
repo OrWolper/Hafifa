@@ -73,7 +73,7 @@ jobs:
 
       - name: Create subscription keys and add them to db (not working)
         run: |
-          python test.py / --ten "123" /
+          python test.py --ten "123" /
 
       # - name: Create subscription keys and add them to db
       #   run: |
