@@ -32,11 +32,11 @@ jobs:
       - name: Create subscription keys and add them to db (working!!!)
         run: |
           PROJECT_NAME=$(echo "${{ github.event.issue.body }}" | awk 'NR == 3')
-          PREPROD_EXTERNAL_KEY="1234567"
+          PREPROD_EXTERNAL_KEY="123456789"
 
           add_key_to_db() {
-            python add-key-to-db.py --project-name "$PROJECT_NAME"
-             --key $1 --is-prod $2
+            output=$(python add-key-to-db.py --project-name "$PROJECT_NAME" --key $1 --is-prod $2)
+            echo $output
           }
           
           add_key_to_db $PREPROD_EXTERNAL_KEY true
@@ -52,19 +52,11 @@ jobs:
       # - name: Create subscription keys and add them to db
       #   run: |
       #     create_subscription_key() {
-      #       python create-subscription-key.py --tenant-id "${{ vars.TENANT_ID }}" --subscription-id "${{ vars.SUBSCRIPTION_ID }}" --apim-rg-name "${{ vars.RESOURCE_GROUP }}" \
-      #         --apim-name "${{ vars.APIM_NAME }}" \
-      #         --client-id "${{ vars.CLIENT_ID }}" \
-      #         --client-secret "${{ secrets.CLIENT_SECRET }}" \
-      #         --subscription-key-name "${PROJECT_KEY_NAME}-$1-$2" \
-      #         --product-name "${{ secrets.$3_PRODUCT }}"
+      #       python create-subscription-key.py --tenant-id "${{ vars.TENANT_ID }}" --subscription-id "${{ vars.SUBSCRIPTION_ID }}" --apim-rg-name "${{ vars.RESOURCE_GROUP }}" --apim-name "${{ vars.APIM_NAME }}" --client-id "${{ vars.CLIENT_ID }}" --client-secret "${{ secrets.CLIENT_SECRET }}" --subscription-key-name "${PROJECT_KEY_NAME}-$1-$2" --product-name "${{ secrets.$3_PRODUCT }}"
       #     }
 
       #     add_key_to_db() {
-      #       python add-ket-to-db.py \
-      #         --project-name "${{ PROJECT_NAME }}" \
-      #         --key $1 \
-      #         --is-prod $2 \
+      #       python add-ket-to-db.py --project-name "$PROJECT_NAME" --key $1 --is-prod $2
       #     }
 
       #     PROJECT_NAME=$(echo "${{ github.event.issue.body }}" | awk 'NR == 3')
