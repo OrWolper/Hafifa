@@ -66,11 +66,7 @@ jobs:
             echo "Current directory: $(pwd)"
             ls -l
             env
-            
-            python add-key-to-db.py \
-              --project-name "$PROJECT_NAME" \
-              --key "12345" \
-              --is-prod "false" \
+
           }
           
           add_key_to_db
