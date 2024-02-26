@@ -35,7 +35,7 @@ def main(project_name = None, key = None, is_prod = None):
     dbConnection = DbConnection(DB_HOST, DB_NAME, DB_USER, DB_PASSWORD, SSL_MODE)
     dbConnection.add_new_key(project_name, key, is_prod)
 
-    return "Did it!"
+    return "99999991"
 
 if __name__ == "__main__":
     main()
