@@ -29,41 +29,14 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      # - name: Create subscription keys and add them to db
-      #   run: |
-      #     PROJECT_NAME=$(echo "${{ github.event.issue.body }}" | awk 'NR == 3')
-      #     PREPROD_EXTERNAL_KEY="123456789"
-          
-      #     python add-key-to-db.py \
-      #       --project-name "$PROJECT_NAME" \
-      #       --key "$PREPROD_EXTERNAL_KEY" \
-      #       --is-prod false \
-
-      # - name: Create subscription keys and add them to db
-      #   run: |
-      #     PROJECT_NAME=$(echo "${{ github.event.issue.body }}" | awk 'NR == 3')
-      #     PREPROD_EXTERNAL_KEY="123456789"
-
-      #     add_key_to_db() {
-      #       echo "$1"
-      #       echo "$2"
-      #       echo "$PROJECT_NAME"
-
-      #       python add-key-to-db.py \
-      #         --project-name "$PROJECT_NAME" \
-      #         --key "$1" \
-      #         --is-prod "$2" \
-      #     }
-          
-      #     add_key_to_db $PREPROD_EXTERNAL_KEY false
-
-      - name: Create subscription keys and add them to db (not working)
+      - name: Create subscription keys and add them to db (working!!!)
         run: |
           PROJECT_NAME=$(echo "${{ github.event.issue.body }}" | awk 'NR == 3')
-          PREPROD_EXTERNAL_KEY="123456789"
+          PREPROD_EXTERNAL_KEY="1234567"
 
           add_key_to_db() {
-            python add-key-to-db.py --project-name "$PROJECT_NAME" --key $1 --is-prod $2
+            python add-key-to-db.py --project-name "$PROJECT_NAME"
+             --key $1 --is-prod $2
           }
           
           add_key_to_db $PREPROD_EXTERNAL_KEY true
@@ -79,10 +52,7 @@ jobs:
       # - name: Create subscription keys and add them to db
       #   run: |
       #     create_subscription_key() {
-      #       python create-subscription-key.py \
-      #         --tenant-id "${{ vars.TENANT_ID }}" \
-      #         --subscription-id "${{ vars.SUBSCRIPTION_ID }}" \
-      #         --apim-rg-name "${{ vars.RESOURCE_GROUP }}" \
+      #       python create-subscription-key.py --tenant-id "${{ vars.TENANT_ID }}" --subscription-id "${{ vars.SUBSCRIPTION_ID }}" --apim-rg-name "${{ vars.RESOURCE_GROUP }}" \
       #         --apim-name "${{ vars.APIM_NAME }}" \
       #         --client-id "${{ vars.CLIENT_ID }}" \
       #         --client-secret "${{ secrets.CLIENT_SECRET }}" \
